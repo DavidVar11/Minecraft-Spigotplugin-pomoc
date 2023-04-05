@@ -1,0 +1,39 @@
+name: Pomoc
+version: '${project.version}'
+main: david11.pomoc
+api-version: 1.19
+authors: [ David11 ]
+description: pomoc
+
+commands:
+  pomoc:
+    description: Komenda na pomoc.
+    usage: /pomoc
+  admin:
+    description: Informacje o Adminie.
+    usage: /admin
+  vip:
+    description: Informacje o VIP'ie.
+    usage: /vip
+  fly:
+    description: Przełącza latanie.
+    usage: /fly
+    aliases: f
+    permission: pomoc.fly_toggle
+    permission-message: Nie możesz przełączyć latania.
+  freemiecz:
+    description: Nic, nic.
+    permission: pomoc.freemiecz
+    usage: /freemiecz
+  menu:
+    description: Otwiera menu.
+    usage: /menu
+  kit:
+    description: Dostępne kity.
+    usage: /kit
+    aliases:
+      - kity
+      - kits
+      - zestaw
+      - zestawy
+  Zbieranie:

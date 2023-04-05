@@ -1,0 +1,9 @@
+main: me.David11.plugin.Main
+version: 1.0
+author: David11
+name: Plugin_David
+
+commands:
+  pomoc:
+  admin:
+  vip:
