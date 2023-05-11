@@ -6,7 +6,7 @@
 
     <groupId>me.David11.pomoc</groupId>
     <artifactId>pomoc</artifactId>
-    <version>1.0-BETA</version>
+    <version>1.1-BETA</version>
     <packaging>jar</packaging>
 
     <name>Pomoc</name>
@@ -45,6 +45,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>fr.mrmicky.fastboard</pattern>
+                            <!-- Replace 'com.yourpackage' with the package of your plugin ! -->
+                            <shadedPattern>com.yourpackage.fastboard</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -77,6 +99,11 @@
             <artifactId>annotations</artifactId>
             <version>23.1.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>fr.mrmicky</groupId>
+            <artifactId>fastboard</artifactId>
+            <version>1.2.1</version>
         </dependency>
     </dependencies>
 </project>

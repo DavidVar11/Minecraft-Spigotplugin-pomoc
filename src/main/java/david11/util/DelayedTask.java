@@ -23,4 +23,8 @@ public class DelayedTask implements Listener {
             runnable.run();
         }
     }
+
+    public int getId() {
+        return id;
+    }
 }

@@ -37,3 +37,11 @@ commands:
       - zestaw
       - zestawy
   Zbieranie:
+
+  setSpawn:
+    description: Ustawia spawn.
+    usage: ./setspawn
+    permission: pomoc.setspawn
+  spawn:
+    description: Teleportuje cię do spawna serwera.
+    usage: /spawn

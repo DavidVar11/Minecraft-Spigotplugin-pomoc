@@ -1,11 +1,14 @@
 package david11;
 
 import david11.commands.*;
-//import david11.handlers.PlayerHandler;
 import david11.enchants.CustomEnchants;
-import david11.handlers.CoalHandler;
+import david11.handlers.BedrockHandler;
+import david11.handlers.PlayerHandler;
 import david11.handlers.TorchHandler;
+import david11.util.ConfigUtil;
 import david11.util.DelayedTask;
+import david11.util.Scoreboard;
+import david11.util.SpawnUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -22,7 +25,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -41,12 +43,26 @@ public class pomoc extends JavaPlugin implements Listener {
         getCommand("FreeMiecz").setExecutor(new FreeMieczCommand());
         getCommand("menu").setExecutor(new Menu(this));
         getCommand("kit").setExecutor(new KitCommand(this));
+        getCommand("spawn").setExecutor(new Spawn(new SpawnUtil(this)));
+        SpawnUtil spawnUtil = new SpawnUtil(this);
+        getCommand("setSpawn").setExecutor(new SetSpawn(spawnUtil));
         new TorchHandler(this);
         new DelayedTask(this);
-        new CoalHandler(this);
-//      new PlayerHandler(this);
+        new BedrockHandler(this);
+        new PlayerHandler(this);
+        new Scoreboard(this);
         CustomEnchants.register();
         this.getServer().getPluginManager().registerEvents(this, this);
+
+        saveDefaultConfig();
+        List<String> kitItems = (List<String>) getConfig().getList("kit");
+        for (String itemName: kitItems) {
+            Bukkit.getLogger().info(itemName);
+        }
+
+        ConfigUtil config = new ConfigUtil(this, "test.yml");
+        config.getConfig().set("hello", "world");
+        config.save();
         // Plugin startup logic
 
     }
@@ -70,7 +86,7 @@ public class pomoc extends JavaPlugin implements Listener {
 
             ItemMeta meta = item.getItemMeta();
             List<String> lore = new ArrayList<String>();
-            lore.add(ChatColor.GRAY + "Zbieranie I");
+            lore.add(ChatColor.GRAY + "Zbieranie");
             if (meta.hasLore())
                 for (String l : meta.getLore())
                     lore.add(l);
